@@ -12,7 +12,7 @@ data Term a
   | Pair (Term a) (Term a)
 
 Substitution : Type -> Type
-Substitution a = SortedMap Var (Term a)    -- suboptimal; consider implementing basic HAMT or similia
+Substitution a = SortedMap Var (Term a)
 
 record State : Type -> Type where
    MkState : (s : Substitution a) ->
@@ -27,7 +27,7 @@ Goal : Type -> Type
 Goal a = (State a) -> LStream a
 
 
-class Eq a => Unifiable a where
+interface Eq a => Unifiable a where
   unifyLVal : a -> a -> Substitution a -> Maybe (Substitution a)
   unifyLVal u v s = if u == v
                     then Just s
